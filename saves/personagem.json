@@ -1,0 +1,11 @@
+{
+  "nome": "Ely",
+  "genero": "Masculino",
+  "classe": "Guerreiro",
+  "vida": 100,
+  "forca": 8,
+  "velocidade": 6,
+  "defesa": 7,
+  "magia": 2,
+  "defmagica": 3
+}

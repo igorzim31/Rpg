@@ -1,0 +1,201 @@
+import prompt from "prompt-sync";
+import * as fs from 'fs'
+import { goblin, esqueleto, javali, serpente, zumbi, Inimigo, Personagem } from "./Dadsys.ts";
+
+const teclado = prompt();
+
+export function sistemafight(perso: Personagem, inimigo: Inimigo) {
+    console.log("\n Uma batalha começou!");
+    let danofisicop = perso.forca * 10
+    let danofisicoi = inimigo.forca * 10
+    let defesap = (perso.defesa / (perso.defesa + 8) )
+    let defesai = (inimigo.defesa / (inimigo.defesa + 8) ) 
+    let turno = 1;
+
+    while (perso.vida > 0 && inimigo.vida > 0) { 
+        console.log(`\n Turno ${turno} `);
+     
+        console.log(`\n Sua vida: ${perso.vida} | Vida do inimigo: ${inimigo.vida}`);
+
+        const acaoturno = teclado("Você quer atacar ou fugir? (atacar/fugir) ");
+    if (acaoturno.toLowerCase() === "atacar") { 
+        let danoFinalp = Math.floor(danofisicop * (1 - defesai))
+        let danoFinali = Math.floor(danofisicoi * (1 - defesap))
+        inimigo.vida -= danoFinalp
+        console.log(`\n Você causou ${danoFinalp.toFixed(2)} de dano ao inimigo!`);
+        perso.vida -= danoFinali
+        console.log(`\n O inimigo causou ${danoFinali.toFixed(2)} de dano a você!`);
+        turno++;
+    } else if (acaoturno.toLowerCase() === "fugir") {
+        console.log("Você fugiu da batalha!");
+        break;
+    } else {
+        console.log("Opção inválida. Por favor, escolha 'atacar' ou 'fugir'.");
+    }
+ } 
+    if (perso.vida <= 0) {
+        console.log("\n Você foi solado pelo inimigo...");
+    } else if (inimigo.vida <= 0) {
+        console.log("\n Parabéns! Você solou o inimigo!");
+    }
+}
+
+ 
+
+// Função para carregar o personagem salvo
+function carregarPersonagem(): Personagem {
+    try {
+        const dadosJson = fs.readFileSync("saves/personagem.json", "utf-8");
+        const dados = JSON.parse(dadosJson);
+        
+        // Criar personagem com os valores salvos
+        const perso = new Personagem(dados.vida, dados.forca, dados.velocidade, dados.defesa, dados.magia, dados.defmagica);
+        perso.nome = dados.nome;
+        perso.genero = dados.genero;
+        perso.classe = dados.classe;
+        
+        console.log("Personagem carregado do arquivo!");
+        return perso;
+    } catch (error) {
+        console.log("Nenhum personagem salvo encontrado. crie um novo personagem.");
+        // Se não houver arquivo, criar um personagem padrão
+        const perso = new Personagem(100, 5, 5, 5, 5, 5);
+        perso.godscretion("Aventureiro", "M", 1);
+        return perso;
+    }
+}
+
+// Criar instâncias dos inimigos com seus valores corretos
+const goblim = new goblin();
+const esqueletom = new esqueleto();
+const javalizao = new javali();
+const serpentinha = new serpente();
+const zumbizao = new zumbi();
+
+
+// Array com todos os inimigos para poder sortear
+const inimigos = [goblim, esqueletom, javalizao, serpentinha, zumbizao];
+
+// Carregar o personagem salvo (ou criar um padrão)
+const perso = carregarPersonagem();
+
+export function sistemaBatalha() { 
+while (true) {
+    console.log("\nVocê quer lutar ou fugir? (lutar/fugir/sair)");  
+    const escolha = teclado("Digite a opção: ");
+    
+    switch (escolha.toLowerCase()) {
+        case "lutar":
+            // Sorteia um inimigo aleatório do array
+            const inimigoAleatorio = inimigos[Math.floor(Math.random() * inimigos.length)];
+            sistemafight(perso, inimigoAleatorio);
+            break;
+        case "fugir":
+            console.log("Você fugiu da batalha!");
+            break;
+        case "sair":
+            console.log("Saindo do sistema de batalha...");
+            return("main"); //
+        default:
+            console.log("Opção inválida. Por favor, escolha 'lutar', 'fugir' ou 'sair'.");
+    }
+
+}
+} 
+
+
+
+function classhow(caminhoClasses: string) {
+    try {
+        // conseguiu console.log('Tentando ler save.txt...'); !!
+        // Ler o save.txt e usar o último registro (formato: nome;genero;classe)
+        const saveData = fs.readFileSync('saves/save.txt', 'utf-8').trim();
+        // essa porra aqui é pra caso não exista o save por algum erro seja dito ao usuario
+        if (!saveData) {
+            console.log('save.txt vazio. crie um personagem primeiro.');
+            return;
+        }
+
+        const registro = saveData.split('\n').pop() || '';
+        // console.log('Último registro:', registro);
+        const partes = registro.split(',');
+        // console.log('Partes:', partes); 
+        if (partes.length < 3) {
+            console.log('Formato inválido em save.txt. Use nome;genero;classe.');
+            return;
+        }
+
+        const classeDefinida = Number(partes[2]);
+        // console.log('Classe definida:', classeDefinida);
+        if (!Number.isInteger(classeDefinida)) {
+            console.log('Classe inválida no save.txt:', partes[2]);
+            return;
+        }
+
+        let primeralinha: number;
+        let ultimalinha: number;
+
+        // Determinar as linhas baseado na classe
+        switch (classeDefinida) {
+            case 1:
+                primeralinha = 1;
+                ultimalinha = 6;
+                break;
+            case 2:
+                primeralinha = 9;
+                ultimalinha = 14;
+                break;
+            case 3:
+                primeralinha = 17;
+                ultimalinha = 22;
+                break;
+            case 4:
+                primeralinha = 25;
+                ultimalinha = 30;
+                break;
+            case 5:
+                primeralinha = 33;
+                ultimalinha = 38;
+                break;
+            default:
+                console.log("Classe inválida!");
+                return;
+        }
+
+        const classContent = fs.readFileSync(caminhoClasses, 'utf-8');
+        const classLines = classContent.split('\n');
+        for (let i = primeralinha - 1; i < ultimalinha && i < classLines.length; i++) {
+            console.log(classLines[i]);
+        }
+    } catch (error) {
+        console.log("Erro ao ler os arquivos.");
+    }
+}
+
+function godscreation(perso: Personagem) {
+
+
+    try {
+
+        console.log("Bem Vindo a Criação de personagem!! ");
+        console.log("================================");
+        const nome = teclado("Nome do Personagem: ");
+        console.log("================================");
+        const generoInput = teclado("Escolha seu genero Masculino(M) ou Feminino(F):").toUpperCase();
+        console.log("================================");
+
+
+        tabclass();
+        perso.classe = +teclado("Selecione sua classe acima:")
+        console.log("================================ \n Você Selecionou a classe: " + perso.classe);
+
+
+        perso.godscretion(nome, generoInput, perso.classe);
+    }
+    catch (error) {
+        console.log("Erro ao criar personagem.");
+    }
+
+        save(perso);
+}
+

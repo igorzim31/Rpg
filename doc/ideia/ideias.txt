@@ -1,0 +1,51 @@
+Campello 26/march (Background Music) { to por dar um jeito de por uma musica de fundo no jogo, inicialmente seria uma para o menu principal e outra para quando o jogo fosse gerado, não fazia ideia nem se era possivel, mas aparentemente com a biblioteca "sound-play" é possivel sim}
+
+
+
+
+sistema de combate:
+
+
+Turnos: +Velocidade = firstmove
+vida = 100                           
+força = dano fisico / defesa =   força x10 - defesa x 6 =
+magia = dano mágico / defmagica =   força x10 - defesa x 6 =
+
+
+itens: 
+Espada;Força+2;
+Uma espada padrão;
+
+
+Arco;velocidade+1;+alcance
+Requer fechas para uso;
+
+Cajado;Magia+1;+alcance
+Parece muito poderoso;
+
+Cruz;Fe+1;magia+1
+precisa saber orar;
+
+possiveis loots de baús
+Creigo
+Crucifixo do Rei Louco: Excelente para builds  de  fé.
+Castiçal de clerigo
+
+Mago
+cajado da bruxa
+
+cavaleiro e paladino 
+uchigatana
+machado do matador de dragão
+
+
+desintupidor de vaso do ikoroman
++1000 de dano
+
+Armaduras:
+Armadura Leve:
+Couro +1 Defesa 
+Armadura Media:
+Peitoral +3 
+Armadura Pesada:
+Cota de malha +5 
