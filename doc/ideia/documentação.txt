@@ -44,3 +44,6 @@ apaguei minhas antigas tentativas de por bg music que estavam como texto "// iss
 29 de Abril - Implementação: (Igor Henrique 
      Todos atributos dentro das class, sao privado (tirando claro o duelo).
  )
+06 de Maio - (Igor Henrique
+     Dei uma polida boa no codigo, implementei o Jest, organizei as pastas e nomes, e também coloquei o projeto no Github. Foi divertido.
+)
