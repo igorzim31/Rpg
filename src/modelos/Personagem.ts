@@ -4,15 +4,15 @@ import { exec } from 'child_process';
 
 
 export class Personagem {
-   private _nome: string;
-   private _genero: string;
-   private _classe: string;
-   private _vida: number;
-   private _forca: number;
-   private _velocidade: number;
-   private _defesa: number;
-   private _magia: number;
-   private _defmagica: number;
+   protected _nome: string;
+   protected _genero: string;
+   protected _classe: string;
+   protected _vida: number;
+   protected _forca: number;
+   protected _velocidade: number;
+   protected _defesa: number;
+   protected _magia: number;
+   protected _defmagica: number;
     
     constructor(vida: number, forca: number, velocidade: number, defesa: number, magia: number, defmagica: number) {
         this._nome = "";
@@ -94,35 +94,9 @@ export class Personagem {
 
 }
 
+   
 
 
-export class Guerreiro extends Personagem {
-    constructor() {
-        super(100, 8, 6, 7, 2, 3);
-    }
-}
-export class Mago extends Personagem {
-    constructor() {
-        super(100, 2, 5, 3, 10, 7);
-    }       
-} 
-export class Arqueiro extends Personagem {
-    constructor() {
-        super(100, 6, 9, 5, 3, 4);
-    }           
-}
-export class Paladino extends Personagem {
-    constructor() {
-        super(100, 7, 3, 8, 5, 7);
-    }           
-}
-export class Necromante extends Personagem {
-    constructor() {
-        super(100, 3, 4, 4, 9, 6);
-    }       
-}    
-
-//Inimigos (acho que vai se manter assim)
 
 
 

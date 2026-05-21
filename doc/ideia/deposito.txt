@@ -1,4 +1,4 @@
-import prompt from "prompt-sync";
+import prompt from "prompt-sync"; 
 import * as fs from 'fs'
 import { goblin, esqueleto, javali, serpente, zumbi, Inimigo, Personagem } from "./Dadsys.ts";
 
