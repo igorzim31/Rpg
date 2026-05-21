@@ -1,6 +1,6 @@
 
 
-export class Inimigo {
+export abstract class Inimigo {
     protected _nome: string;
     protected _vida: number;
     protected _forca: number;
@@ -17,6 +17,79 @@ export class Inimigo {
         this._magia = magia;
         this._defmagica = defmagica;
     }
+
+    public danoAtaqueF(): number {
+        return this.forca * 10;
+    }
+    public danoAtaqueM(): number {
+        return this.magia * 10;
+    }
+
+    public percentualDefesaF(): number {
+        return (this.defesa / (this.defesa + 8));
+    }
+
+    public danoMitigadoF(danoAtaqueF: number): number {
+        const reducao = 1 - this.percentualDefesaF();
+        return Math.round(danoAtaqueF * reducao);
+    }
+
+    public percentualDefesaM(): number {
+        return this.defmagica / (this.defmagica + 8);
+    }
+
+    public danoMitigadoM(danoAtaqueF: number): number {
+        const reducao = 1 - this.percentualDefesaM();
+        return Math.round(danoAtaqueF * reducao);
+    }
+
+    public percentualEsquiva(): number {
+        return this.velocidade / (this.velocidade + 18.67);
+    }
+
+    public rolouEsquiva(): boolean {
+        return Math.random() < this.percentualEsquiva();
+    }
+
+    public rolouCritico(): boolean {
+        return Math.random() < 0.05;
+    }
+    
+
+    public receberDanoF(danoAtaqueF: number): number {
+        if (this.rolouEsquiva()) {
+            return 0;
+        }
+    
+        let danoAplicado = this.danoMitigadoF(danoAtaqueF);
+
+        if (this.rolouCritico()) {
+            danoAplicado = Math.floor(danoAplicado * 1.5);
+        }
+
+        this.vida -= danoAplicado;
+
+        return danoAplicado;
+
+    }
+
+    public receberDanoM(danoAtaqueM: number): number {
+        if (this.rolouEsquiva()) {
+            return 0;
+        }
+    
+        let danoAplicado = this.danoMitigadoM(danoAtaqueM);
+
+        if (this.rolouCritico()) {
+            danoAplicado = Math.floor(danoAplicado * 1.5);
+        }
+
+        this.vida -= danoAplicado;
+
+        return danoAplicado;
+    }
+
+    //sets e gets
 
     public get nome(): string {
         return this._nome;
@@ -48,19 +121,6 @@ export class Inimigo {
     }
 }
 
-export class goblin extends Inimigo {
-    constructor() {
-        super("goblin",100, 3, 7, 2, 2, 3);
-    }
-}
-export class javali extends Inimigo {
-    constructor() {
-        super("javali", 100, 6, 7, 5, 0, 3);
-    }
-}
-export class esqueleto extends Inimigo {
-    constructor() {
-        super("esqueleto", 100, 3, 4, 2, 0, 4);
-    }
-}
+
+
 

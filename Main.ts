@@ -8,10 +8,11 @@ import { Mago } from "./src/modelos/classes/mago.ts";
 import { Arqueiro } from "./src/modelos/classes/arqueiro.ts";
 import { Paladino } from "./src/modelos/classes/paladino.ts";
 import { Necromante } from "./src/modelos/classes/necromante.ts"
-import { goblin, esqueleto, javali} from "./src/modelos/Inimigo.ts";
+import { goblin } from "./src/modelos/inimigos/goblin.ts";
+import { esqueleto } from "./src/modelos/inimigos/esqueleto.ts";
+import { javali } from "./src/modelos/inimigos/javali.ts";
 import { serpente } from "./src/modelos/inimigos/serpente.ts";
 import { zumbi } from  "./src/modelos/inimigos/zumbi.ts"; 
-import { Duelo } from "./src/batalha/Duelo.ts";
 import { MusicPlayer } from "./src/modelos/Personagem.ts";
 
 
@@ -266,24 +267,24 @@ async function startgame(): Promise<void> {
 }
 
 function startBattle() {
-    const perso = new Duelo(carregarPersonagem());
+    const perso = (carregarPersonagem());
     //const inimigo = new Duelo(new Inimigo("goblin", 100, 3, 7, 2, 2, 3)); 
     const sinimigo = [goblin, javali, esqueleto, zumbi, serpente];
     const aleatorioi = Math.floor(Math.random() * sinimigo.length);
-    const inimigo = new Duelo(new sinimigo[aleatorioi]!());
+    const inimigo = (new sinimigo[aleatorioi]!());
 
     let turno = 1;
  
-    while (perso.lutador.vida > 0 && inimigo.lutador.vida > 0) {
+    while (perso.vida > 0 && inimigo.vida > 0) {
       console.log(`\n============ Turno ${turno} ============`);
-      console.log(`\n A ${inimigo.lutador.nome} apareceu! Prepare-se para a batalha!`);
-      console.log(`\n Sua vida: ${perso.lutador.vida} | Vida do ${inimigo.lutador.nome}: ${inimigo.lutador.vida}`);
+      console.log(`\n A ${inimigo.nome} apareceu! Prepare-se para a batalha!`);
+      console.log(`\n Sua vida: ${perso.vida} | Vida do ${inimigo.nome}: ${inimigo.vida}`);
    
       console.log("\nVocê deseja atacar ou fugir? (atacar/fugir)");
       const acao = teclado("Digite a opção: ");
 
         if (acao.toLowerCase() === "atacar") {
-           const tipoAtaque = teclado(`Você ${perso.lutador.nome} deseja usar ataque físico ou mágico? (físico/mágico) `);
+           const tipoAtaque = teclado(`Você ${perso.nome} deseja usar ataque físico ou mágico? (físico/mágico) `);
 
             if (tipoAtaque.toLowerCase() === "físico" || tipoAtaque.toLowerCase() === "fisico") {
 
@@ -291,7 +292,7 @@ function startBattle() {
                 console.log(`\n Você causou ${DanoInimigo} de dano ao inimigo!`);
 
                 const DanoPersonagem = perso.receberDanoF(inimigo.danoAtaqueF());
-                console.log(`\n O ${inimigo.lutador.nome} causou ${DanoPersonagem} de dano a você!`);
+                console.log(`\n O ${inimigo.nome} causou ${DanoPersonagem} de dano a você!`);
 
             } else if (tipoAtaque.toLowerCase() === "mágico" || tipoAtaque.toLowerCase() === "magico") {
 
@@ -299,7 +300,7 @@ function startBattle() {
                 console.log(`\n Você causou ${DanoInimigo} de dano ao inimigo!`);
 
                 const DanoPersonagem = perso.receberDanoM(inimigo.danoAtaqueM());
-                console.log(`\n O ${inimigo.lutador.nome} causou ${DanoPersonagem} de dano a você!`);
+                console.log(`\n O ${inimigo.nome} causou ${DanoPersonagem} de dano a você!`);
 
             }
 
@@ -310,10 +311,10 @@ function startBattle() {
         console.log("Opção inválida. Por favor, escolha 'atacar' ou 'fugir'.");
         }
         turno++;
-        if (perso.lutador.vida <= 0) {
+        if (perso.vida <= 0) {
         console.log("\n Você foi derrotado pelo inimigo..."); 
         break;
-        } else if (inimigo.lutador.vida <= 0) {
+        } else if (inimigo.vida <= 0) {
         console.log("\n Parabéns! Você solou o inimigo!");
         break;  
         }   
@@ -351,7 +352,7 @@ function carregarPersonagem(): Personagem {
         const dadosJson = fs.readFileSync("saves/personagem.json", "utf-8");
         const dados = JSON.parse(dadosJson);
 
-        const perso = new Personagem(dados.vida, dados.forca, dados.velocidade, dados.defesa, dados.magia, dados.defmagica);
+        const perso = new Guerreiro;
         
         perso.nome = dados.nome;
         perso.genero = dados.genero;
@@ -362,7 +363,7 @@ function carregarPersonagem(): Personagem {
     }  catch (error) {
         console.log("Nenhum personagem salvo encontrado. crie um novo personagem.");
         // Se não houver arquivo, criar um personagem padrão
-        const persoPadrao = new Personagem(100, 8, 6, 7, 2, 3);
+        const persoPadrao = new Guerreiro;
         persoPadrao.nome = "Aventureiro";
         persoPadrao.genero = "Masculino";
         persoPadrao.classe = "Guerreiro";
@@ -371,7 +372,7 @@ function carregarPersonagem(): Personagem {
 
 }
 
-const perso: Personagem = new Personagem(100, 8, 6, 7, 2, 3); // Valores padrão iniciais
+const perso: Personagem = new Guerreiro; // Valores padrão iniciais
 //const prod: Produto = new Produto(); 
 const jukebox = new MusicPlayer();
 

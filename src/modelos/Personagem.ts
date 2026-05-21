@@ -3,7 +3,7 @@ import path from "path";
 import { exec } from 'child_process';
 
 
-export class Personagem {
+export abstract class Personagem {
    protected _nome: string;
    protected _genero: string;
    protected _classe: string;
@@ -26,7 +26,81 @@ export class Personagem {
         this._defmagica = defmagica;
     }
 
+    public danoAtaqueF(): number {
+        return this.forca * 10;
+    }
+    public danoAtaqueM(): number {
+        return this.magia * 10;
+    }
 
+    public percentualDefesaF(): number {
+        return (this.defesa / (this.defesa + 8));
+    }
+
+    public danoMitigadoF(danoAtaqueF: number): number {
+        const reducao = 1 - this.percentualDefesaF();
+        return Math.round(danoAtaqueF * reducao);
+    }
+
+    public percentualDefesaM(): number {
+        return this.defmagica / (this.defmagica + 8);
+    }
+
+    public danoMitigadoM(danoAtaqueF: number): number {
+        const reducao = 1 - this.percentualDefesaM();
+        return Math.round(danoAtaqueF * reducao);
+    }
+
+    public percentualEsquiva(): number {
+        return this.velocidade / (this.velocidade + 18.67);
+    }
+
+    public rolouEsquiva(): boolean {
+        return Math.random() < this.percentualEsquiva();
+    }
+
+    public rolouCritico(): boolean {
+        return Math.random() < 0.05;
+    }
+    
+
+    public receberDanoF(danoAtaqueF: number): number {
+        if (this.rolouEsquiva()) {
+            return 0;
+        }
+    
+        let danoAplicado = this.danoMitigadoF(danoAtaqueF);
+
+        if (this.rolouCritico()) {
+            danoAplicado = Math.floor(danoAplicado * 1.5);
+        }
+
+        this.vida -= danoAplicado;
+
+        return danoAplicado;
+
+    }
+
+    public receberDanoM(danoAtaqueM: number): number {
+        if (this.rolouEsquiva()) {
+            return 0;
+        }
+    
+        let danoAplicado = this.danoMitigadoM(danoAtaqueM);
+
+        if (this.rolouCritico()) {
+            danoAplicado = Math.floor(danoAplicado * 1.5);
+        }
+
+        this.vida -= danoAplicado;
+
+        return danoAplicado;
+    }
+
+
+    // sets e gets
+
+    
     public set nome(nome: string) {
         if (nome.length < 3 || nome.length > 31){
             throw new Error("Tamanho do nome inválido")
@@ -41,7 +115,7 @@ export class Personagem {
     public set genero(genero: string) {
         if (genero.charAt(0) !== "M" && genero.charAt(0)  !== "F"){
         
-            throw new Error("tico")
+            throw new Error("bah")
         } 
         this._genero = genero;
     }

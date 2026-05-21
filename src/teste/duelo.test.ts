@@ -1,19 +1,20 @@
 import {describe, expect, test} from '@jest/globals';
 import { Personagem  } from "../modelos/Personagem.ts";
-import { Duelo } from "../batalha/Duelo.ts";
 import { Inimigo } from "../modelos/Inimigo.ts";
+import { Guerreiro } from '../modelos/classes/guerreiro.ts';
+import { esqueleto } from '../modelos/inimigos/esqueleto.ts';
 
 
 
 describe("Sistema de Batalha", () => {
     test("Deve calcular o valor base do dano de ataque a partir dos atributos do lutador", () => {
         //Cenário
-        const lutadorp: Personagem = new Personagem(100, 8, 6, 7, 2 , 3);
-        const personagem: Duelo = new Duelo(lutadorp);
+        const lutadorp: Personagem = new Guerreiro;
+        
         
         //Ação
 
-        const resultado: number = personagem.danoAtaqueF();
+        const resultado: number = lutadorp.danoAtaqueF();
 
         //Validação
 
@@ -23,11 +24,10 @@ describe("Sistema de Batalha", () => {
 
     test("Deve calcular o percentual de redução de dano baseado na defesa do lutador", () => {
         //Cenário
-         const lutadori: Inimigo = new Inimigo ("esqueleto", 100, 3, 4, 4, 0, 4 );
-         const inimigo: Duelo = new Duelo(lutadori);
+         const lutadori: Inimigo = new esqueleto;
 
          //Ação
-         const resultado: number = inimigo.percentualDefesaF();
+         const resultado: number = lutadori.percentualDefesaF();
          
          //Validação
 
@@ -36,16 +36,14 @@ describe("Sistema de Batalha", () => {
 
     test("O personagem deve mitigar o dano de ataque baseado em seu percentual de defesa ", () => {
         //Cenário,
-        const lutadorp: Personagem = new Personagem(100, 8, 6, 7, 2 , 3);
-        const lutadori: Inimigo = new Inimigo ("esqueleto", 100, 3, 4, 4, 0, 4 );
-        const personagem: Duelo = new Duelo(lutadorp);
-        const inimigo: Duelo = new Duelo(lutadori);
+        const lutadorp: Personagem = new Guerreiro;
+        const lutadori: Inimigo = new esqueleto;
 
-        const ataquei: number = inimigo.danoAtaqueF();
-        const mitigarp: number = personagem.percentualDefesaF();
+        const ataquei: number = lutadori.danoAtaqueF();
+        const mitigarp: number = lutadorp.percentualDefesaF();
 
         //Ação
-        const resultado: number = personagem.danoMitigadoF(ataquei);
+        const resultado: number = lutadorp.danoMitigadoF(ataquei);
 
         //Validação
 

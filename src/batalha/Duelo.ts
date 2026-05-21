@@ -2,7 +2,7 @@ import { Inimigo } from "../modelos/Inimigo.ts";
 import { Personagem } from "../modelos/Personagem.ts";
 
 
-export class Duelo {
+/* export class Duelo {
     public lutador: Personagem | Inimigo;
     constructor(lutador: Personagem | Inimigo) {
         this.lutador = lutador;
