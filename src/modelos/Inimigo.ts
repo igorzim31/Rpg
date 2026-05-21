@@ -1,13 +1,13 @@
 
 
 export class Inimigo {
-    private _nome: string;
-    private _vida: number;
-    private _forca: number;
-    private _velocidade: number;
-    private _defesa: number;
-    private _magia: number;
-    private _defmagica: number;
+    protected _nome: string;
+    protected _vida: number;
+    protected _forca: number;
+    protected _velocidade: number;
+    protected _defesa: number;
+    protected _magia: number;
+    protected _defmagica: number;
     constructor(nome: string, vida: number, forca: number, velocidade: number, defesa: number, magia: number, defmagica: number) {
         this._nome = nome;
         this._vida = vida;
@@ -63,13 +63,4 @@ export class esqueleto extends Inimigo {
         super("esqueleto", 100, 3, 4, 2, 0, 4);
     }
 }
-export class zumbi extends Inimigo {
-    constructor() {
-        super("zumbi", 100, 4, 3, 5, 0, 3);
-    }
-}
-export class serpente extends Inimigo {
-    constructor() {
-        super("serpente", 100, 5, 8, 4, 0, 2);
-    }
-}
+

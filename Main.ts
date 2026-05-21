@@ -1,8 +1,15 @@
 import prompt from "prompt-sync";
 import * as fs from 'fs'
 import * as readline from 'readline'
-import { Personagem, Guerreiro, Mago, Arqueiro, Paladino, Necromante } from "./src/modelos/Personagem.ts";
-import {goblin, esqueleto, javali, serpente, zumbi} from "./src/modelos/Inimigo.ts";
+import { Personagem } from "./src/modelos/Personagem.ts";
+import { Guerreiro } from "./src/modelos/classes/guerreiro.ts";
+import { Mago } from "./src/modelos/classes/mago.ts";
+import { Arqueiro } from "./src/modelos/classes/arqueiro.ts";
+import { Paladino } from "./src/modelos/classes/paladino.ts";
+import { Necromante } from "./src/modelos/classes/necromante.ts"
+import { goblin, esqueleto, javali} from "./src/modelos/Inimigo.ts";
+import { serpente } from "./src/modelos/inimigos/serpente.ts";
+import { zumbi } from  "./src/modelos/inimigos/zumbi.ts"; 
 import { Duelo } from "./src/batalha/Duelo.ts";
 import { MusicPlayer } from "./src/modelos/Personagem.ts";
 
@@ -428,6 +435,7 @@ async function main() {
 main();
 
 //npx ts-node  Main.ts
+//npx jest
 //sdds godscreation
 
 
