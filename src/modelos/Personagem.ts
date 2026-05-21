@@ -1,9 +1,10 @@
 //import sound from "sound-play";
 import path from "path";
 import { exec } from 'child_process';
+import { DAOPersonagem } from "./DAOPersonagem.ts";
 
 
-export class Personagem {
+export abstract class Personagem implements DAOPersonagem{
    protected _nome: string;
    protected _genero: string;
    protected _classe: string;
@@ -90,6 +91,15 @@ export class Personagem {
 
     public get defmagica(): number {
         return this._defmagica;
+    }
+    salvar(personagem: Personagem): void {
+        throw new Error("Method not implemented.");
+    }
+    buscarPorId(id: number): Personagem | null {
+        throw new Error("Method not implemented.");
+    }
+    listar(): Personagem[] {
+        throw new Error("Method not implemented.");
     }
 
 }
