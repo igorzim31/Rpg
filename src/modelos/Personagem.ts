@@ -1,10 +1,11 @@
 //import sound from "sound-play";
 import path from "path";
 import { exec } from 'child_process';
-import { DAOPersonagem } from "./DAOPersonagem.ts";
+//import { DAOPersonagem2 } from "./DAOPersonagem.ts";
 
 
-export abstract class Personagem implements DAOPersonagem{
+
+export abstract class Personagem{
    protected _nome: string;
    protected _genero: string;
    protected _classe: string;

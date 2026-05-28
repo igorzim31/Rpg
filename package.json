@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "@jest/globals": "^30.3.0",
     "@sucrase/jest-plugin": "^3.0.0",

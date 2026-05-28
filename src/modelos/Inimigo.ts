@@ -1,6 +1,7 @@
+import { ITeste } from "./ITeste.ts";
 
 
-export abstract class Inimigo {
+export abstract class Inimigo implements ITeste{
     protected _nome: string;
     protected _vida: number;
     protected _forca: number;
@@ -16,6 +17,9 @@ export abstract class Inimigo {
         this._defesa = defesa;
         this._magia = magia;
         this._defmagica = defmagica;
+    }
+    action(): void {
+        throw new Error("Method not implemented.");
     }
 
     public danoAtaqueF(): number {
