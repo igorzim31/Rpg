@@ -1,7 +1,5 @@
-import { ITeste } from "./ITeste";
 
-
-export abstract class Inimigo implements ITeste{
+export abstract class Inimigo {
     protected _nome: string;
     protected _vida: number;
     protected _forca: number;

@@ -12,7 +12,6 @@ import { esqueleto } from "./src/modelos/inimigos/esqueleto";
 import { javali } from "./src/modelos/inimigos/javali";
 import { serpente } from "./src/modelos/inimigos/serpente";
 import { zumbi } from  "./src/modelos/inimigos/zumbi"; 
-import { MusicPlayer } from "./src/modelos/Personagem";
 
 
 
@@ -66,6 +65,7 @@ function criacaoPersonagem(perso: Personagem) {
     console.log(`\n${perso.nome}, o ${classnome}, foi criado com sucesso!`);
     save(perso);
 }
+
 function statusPersonagem() {
     const perso = carregarPersonagem();
     console.log(`\nNome: ${perso.nome}`);
@@ -78,6 +78,7 @@ function statusPersonagem() {
     console.log(`Magia: ${perso.magia}`);
     console.log(`Defesa Mágica: ${perso.defmagica}\n`);
 }
+
 function tabela () {
     let continuar = true;
     
@@ -119,7 +120,7 @@ function tabela () {
   }
 }
 
-async function startgame(): Promise<void> {
+async function iniciarJogo(): Promise<void> {
 
     let larguramap = 20;
     let alturamap = 10;
@@ -199,7 +200,7 @@ async function startgame(): Promise<void> {
 
         if (mapa[ny] && mapa[ny][nx] === inimigo) {
             console.log("Você encontrou um inimigo! Prepare-se para a batalha!");
-            startBattle();
+            iniciarBatalha();
             if (mapa[ny] && mapa[ny][nx] === inimigo) { 
                 console.log("\nVocê deseja continuar explorando ou sair do jogo? (continuar/sair)");
                 const escolha = teclado("Digite a opção: ");
@@ -265,7 +266,7 @@ async function startgame(): Promise<void> {
     });
 }
 
-function startBattle() {
+function iniciarBatalha() {
     const perso = (carregarPersonagem());
     //const inimigo = new Duelo(new Inimigo("goblin", 100, 3, 7, 2, 2, 3)); 
     const sinimigo = [goblin, javali, esqueleto, zumbi, serpente];
@@ -291,17 +292,26 @@ function startBattle() {
                 const msgAtaquePlayer = inimigo.receberDanoFisico(perso.danoAtaqueFisico());
                 console.log(`\n-> ${msgAtaquePlayer}`);
 
-                const msgAtaqueInimigo = perso.receberDanoFisico(inimigo.danoAtaqueFisico());
-                console.log(`\n-> O inimigo contra-atacou: ${msgAtaqueInimigo}`);
-
             } else if (tipoAtaque.toLowerCase() === "mágico" || tipoAtaque.toLowerCase() === "magico") {
 
                 const msgAtaquePlayer = inimigo.receberDanoMagica(perso.danoAtaqueMagica());
                 console.log(`\n-> ${msgAtaquePlayer}`);
 
-                const msgAtaqueInimigo = perso.receberDanoFisico(inimigo.danoAtaqueFisico());
-                console.log(`\n-> O inimigo contra-atacou: ${msgAtaqueInimigo}`);
+            } 
+            if (inimigo.vida > 0) { 
+            const potencialFisico = inimigo.danoAtaqueFisico();
+            const potencialMagico = inimigo.danoAtaqueMagica();
 
+            let msgAtaqueInimigo = "";
+
+            
+            if (potencialFisico >= potencialMagico) {
+            msgAtaqueInimigo = perso.receberDanoFisico(potencialFisico);
+            } else {
+            msgAtaqueInimigo = perso.receberDanoMagica(potencialMagico);
+            }
+
+            console.log(`\n-> O inimigo contra-atacou: ${msgAtaqueInimigo}`);
             }
 
         } else if (acao.toLowerCase() === "fugir") {
@@ -321,7 +331,48 @@ function startBattle() {
     }
 }
 
-function leave() {
+function bestiario() {
+    let continuar = true;
+
+    while (continuar) {
+        console.log("\n A tabela de classes é a seguinte: \n");
+        console.log("================================");
+        console.log("1. Goblin \n2. Javali \n3. Esqueleto \n4. Zumbi \n5. Serpente");
+        console.log("================================");
+        const inimigo = +teclado("Selecione o inimigo para ver os status ou aperta 0 para sair: ");
+        console.log("================================");
+        switch (inimigo) {
+            case 0:
+                console.log("Saindo do bestiário...");
+                continuar = false;
+                break;
+            case 1:
+                console.log("Esqueleto \nForça: 3 \nVelocidade: 4 \nDefesa: 2 \nMagia: 0 \nDefesa Mágica: 4 ");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 2:
+                console.log("Javali \nForça: 6 \nVelocidade: 7 \nDefesa: 5 \nMagia: 0 \nDefesa Mágica: 3 ");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 3:
+                console.log("Goblin \nForça: 3 \nVelocidade: 7 \nDefesa: 2 \nMagia: 2 \nDefesa Mágica: 3 ");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 4:
+                console.log("Serpente \nForça: 5 \nVelocidade: 8 \nDefesa: 4 \nMagia: 0 \nDefesa Mágica: 2 ");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 5:
+                console.log("Zumbi \nForça: 4 \nVelocidade: 3 \nDefesa: 5 \nMagia: 0 \nDefesa Mágica: 3 ");
+                teclado("Pressione enter para continuar... ");
+                break;
+            default:
+                console.log("Classe inválida!");
+        }
+   }
+}
+
+function sair() {
     console.log("Para sair Digite 0, para continuar digite 1");
     const end = +teclado("Opção: ");
     if (end === 0) {
@@ -373,8 +424,6 @@ function carregarPersonagem(): Personagem {
 }
 
 const perso: Personagem = new Guerreiro; // Valores padrão iniciais
-//const prod: Produto = new Produto(); 
-const jukebox = new MusicPlayer();
 
 
 async function main() {
@@ -385,9 +434,8 @@ async function main() {
         console.log("3. Listar Classes") // ainda em duvida se aqui simplesmente ponho o inicio do jogo ou se apenas criação de mapa, sla
         console.log("4. Iniciar Jogo");
         console.log("5. Teste Batalha");
-        console.log("6. ativar musica de fundo"); 
-        console.log("7. parar musica de fundo"); // planejo futuramente dar a opção de escolher a música, mas por enquanto só tem uma música de fundo mesmo, e o menu de música é só pra ativar ou desativar a música de fundo mesmo, sem opção de escolher a música, mas futuramente quero expandir isso pra ter mais opções de músicas e um menu mais elaborado pra isso, mas por enquanto é só isso mesmo
-        console.log("8. Sair do Jogo");
+        console.log("6. Bestiário");
+        console.log("7. Sair do Jogo");
 
         console.log("\n ================================");
 
@@ -396,12 +444,8 @@ async function main() {
         switch (escolha) {
             case 1:
                 criacaoPersonagem(perso);
-                break;  //por tudo isso em uma function provavelmente
-
+                break;  
             case 2:
-                //console.log("\n Aqui estão os status da sua classe: \n");
-                //classhow('gamedados/stats.txt');  // le arquivo save.txt e define qual linha em stats.txt mostrar, tá dentro da func o input, aqui é só o output
-               // console.log("\n");
                 statusPersonagem();
                 break;
 
@@ -409,22 +453,16 @@ async function main() {
                 tabela();
                 break;
             case 4:
-                await startgame();  
+                await iniciarJogo();  
                 break;
             case 5:
-                // NÃO USE 'NEW' AQUI.
-                // NÃO USE 'AWAIT' AQUI.
-                startBattle();
+                iniciarBatalha();
                 break;
-
             case 6:
-                jukebox.playMusic();
+                bestiario();
                 break;
             case 7:
-                jukebox.stopMusic();
-                break;
-            case 8:
-                leave();
+                sair();
                 break;
             default:
                 console.log("Opção inválida, selecione uma das opções acima!!");

@@ -1,8 +1,3 @@
-//import sound from "sound-play";
-import path from "path";
-import { exec } from 'child_process';
-//import { DAOPersonagem2 } from "./DAOPersonagem.ts";
-
 
 
 export abstract class Personagem{
@@ -175,15 +170,6 @@ export abstract class Personagem{
     public get defmagica(): number {
         return this._defmagica;
     }
-    salvar(personagem: Personagem): void {
-        throw new Error("Method not implemented.");
-    }
-    buscarPorId(id: number): Personagem | null {
-        throw new Error("Method not implemented.");
-    }
-    listar(): Personagem[] {
-        throw new Error("Method not implemented.");
-    }
 
 }
 
@@ -194,70 +180,3 @@ export abstract class Personagem{
 
 
 
-
-export class MusicPlayer {
-    public isAtivo: boolean = false;
-    private audioProcess: any = null;
-    // Identificador único para este processo de áudio
-    private readonly audioAlias = "C:\\Users\\LUCASCAMPELLOCARDOZO\\OneDrive - SenacRS\\2 SEM\\Programação orientada a objts - Quinta (Angelo)\\grupo\\musica.mp3";
-
-    playMusic() {
-        this.isAtivo = true;
-        // 1. caminho da musica (precisa ser barras duplas, caso contrário o PowerShell se perde)
-        const filePath = path.resolve("C:\\Users\\LUCASCAMPELLOCARDOZO\\OneDrive - SenacRS\\2 SEM\\Programação orientada a objts - Quinta (Angelo)\\grupo\\musica.mp3")
-
-        // 2. Comando via PowerShell que carrega a biblioteca de áudio e toca no próprio terminal sem abrir janela em outro lugar.
-        const playCmd = `powershell -Command "Add-Type -AssemblyName PresentationCore; $p = New-Object System.Windows.Media.MediaPlayer; $p.Open('${filePath}'); $p.Play(); while($true){Start-Sleep 1}"`;
-
-        // 3. Executamos e armazenamos referência do processo
-        this.audioProcess = exec(playCmd);
-        console.log("\n🎵 Música iniciada! (Use a opção 6 para parar)");
-    }
-
-    stopMusic() {
-        this.isAtivo = false;
-
-        // Se temos referência do processo, matamos direto pelo PID
-        if (this.audioProcess && this.audioProcess.pid) {
-            try {
-                // Mata o processo PowerShell filhando pelo PID
-                exec(`taskkill /PID ${this.audioProcess.pid} /T /F`, (err) => {
-                    if (!err) {
-                        console.log(" Música interrompida. Terminal preservado.");
-                    } else {
-                        console.log(" Erro ao parar música, tentando método alternativo...");
-                        // Alternativa: procura e mata todos os powershell.exe que rodam esse script específico
-                        exec(`powershell -Command "Get-Process powershell | Where-Object {$_.CommandLine -like '*MediaPlayer*'} | Stop-Process -Force"`, (err2) => {
-                            if (!err2) console.log(" Música parada com sucesso!");
-                        });
-                    }
-                });
-                this.audioProcess = null;
-            } catch (e) {
-                console.log(" Erro ao tentar parar a música");
-            }
-        } else {
-            console.log("Nenhuma música está tocando");
-        }
-    }
-}
-//     stopMusic() {
-//         this.isAtivo = false;
-
-//         // TENTATIVA 1: Pelo objeto do processo (se o Node ainda tiver o controle)
-//         if (this.currentProcess) {
-//             try { this.currentProcess.kill(); } catch(e) {}
-//         }
-
-//         // TENTATIVA 2: "BOTÃO DE PÂNICO" (Força o Windows a fechar o player)
-//         // O sound-play usa o PowerShell ou Media Player. Vamos matar os dois.
-//         exec('taskkill /F /IM powershell.exe /T', (err) => {
-//             // Se não era o powershell, tentamos o player padrão
-//             exec('taskkill /F /IM wmplayer.exe /T');
-//         });
-
-//         this.currentProcess = null;
-//         console.log("\n🛑 Comando de parada total enviado.");
-//     }
-let trocaestado: MusicPlayer | null = null;
-const comando = "executar";
