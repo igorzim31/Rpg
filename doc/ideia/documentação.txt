@@ -1,0 +1,53 @@
+inicio 19 março (
+Evento:
+no primeiro dia tivemos a aula do angelo e apartir do projeto base criamos o tema "RPG" no mesmo dia em casa já alteramos os nomes para se encaixar em nossa ideia.
+)
+22 de março( Lucas Campello
+Evento/Implementações:
+   dia 22 de março adicionei a função fs dentro do código e refinei o switch, finalizando a case 1 por completo, adicionando a function "classhow", "save" e "leave" utilizando principalmente de push e o modelo que o professor edécio já havia passado no primeiro semestre, támbem com a utilização do fs surgiu a necessidade de ler linhas especificas para assim retornar certinho os stats da classe na qual o usuário escolheu, e para isso ser feito, para isso utilizei da function de uma forma na qual antes não havia, pensei que essa function permitia apenas definir quais linhas ler de forma pré definida, mas com ajuda do google entendi e utilizei da switch para definir diversos casos para qual opção o usuario decidir pegar, antes passei umas horas tentando diversas maneiras de fazer isso acontecer, tanto com if quanto com outras formas, até chegar no estado atual
+)
+23 de março(
+Evento:   
+    hoje nos reunimos em aula e tivemos ideias para o projeto, apartir das 15 entramos em call e discutimos ideias para proximos passos e como o projeto seguirá.
+Layout:   
+    alteração em todos fs's para conter as pastas recém criadas
+)
+23 de março( Lucas Campello - Implementação
+    criei o esboço do mapa da case 3 e o sistema de movimentação do personagem
+)
+24 de março ( Igor Henrique | vao mudar para thiago |  destreza é minha rola ladeada)(
+    fiquei farmando aura na aula e agora vou codar para garantir meu futuro, e vou fazer um boss secreto 
+em homenagem ao samuel <3.
+)
+30 de março ( Lucas Campello - Implementação tentativa
+Adicionei musica de fundo, foi mais dificil do que eu esperava. (era o que eu achava)
+)
+31 de março( Lucas Campello - Implementação
+Não, dia 30 a musica não funcionava como eu esperava, não podiamos parar ela quando quisessemos, PASSEI 2 DIAS QUEBRANDO A CABEÇA, nem ia nem os videos do youtube ajudavam, A SOLUÇÃO APARECEU EM UM REDDIT NAS PROFUNDEZAS DA INTERNET, mas depois de ler, e testar por horas e horas... finalmente deu certo, mas que BAITA volta dá para que isso aconteçakkk é triste pensar que provavelmente havia um modo mais fácil que simplesmente não fui capaz de encontrar :D
+)
+1 de abril (adivinha quem novamente, o próprio campello B
+apaguei minhas antigas tentativas de por bg music que estavam como texto "// isso aq" e dei uma polida apagando coisas antigas e imports que estão inutilizados
+)
+2 de Abril - Evento: (
+    Lucas Campello -- reformulação da case 1 utilizanso classe e function.
+    Lucas Campello || Igor -- Reformulação de balanciamento e classes de todo o jogo + adição de protótipo de sistema base
+)
+5 de Abril - Implementação: ( Lucas Campello
+    finalização do sistema inicial de combate e implementação de chamada de todos inimigos e estatus do personagem criado
+)
+15 de Abril - Implementação: ( uau, aqui e um lugar diferente mermo, Igor Henrique
+    Direto ao ponto, fiz um protótipo do combate e como ele funcionaria, ainda falta algumas coisas, porém foquei apenas na prototipação. (e reparei algumas coisas no codigo, mas isso deixo para depois)
+)
+21 de Abril - Implementação: (Igor Henrique  
+    O combate agora e em uma class (antes era numa function), ela funciona muito bem, e também coloquei um inimigo no mapa para fins de testes, dei uma limpada no codigo, e fiz algumas alterações aqui e ali, ainda vou balancear e implementar mais coisas, porem o prototipo do combate esta de fato feito. (ainda vou fazer mais)
+ )
+29 de Abril - Implementação: (Igor Henrique 
+     Todos atributos dentro das class, sao privado (tirando claro o duelo).
+ )
+06 de Maio - (Igor Henrique
+     Dei uma polida boa no codigo, implementei o Jest, organizei as pastas e nomes, e também coloquei o projeto no Github. Foi divertido.
+) 
+28 de Maio - (Igor Henrique 
+)
+18 de junho - (Igor Henrique  
+)

@@ -1,0 +1,39 @@
+1. Guerreiro
+Força: 8
+Velocidade: 6
+Defesa: 7
+Magia: 2
+Defesa Magica: 3
+Foco em combate físico direto e resistência.
+
+2. Mago
+Força: 2
+Velocidade: 5
+Defesa: 3
+Magia: 10
+Defesa Magica: 7
+Especialista em dano mágico, porém frágil fisicamente. 
+
+3. Arqueiro
+Força: 6
+Velocidade: 9
+Defesa: 5
+Magia: 3
+Defesa Magica: 4
+Equilíbrado em seus status e com ataque a distancia
+
+4. Paladino
+Força: 7
+Velocidade: 3
+Defesa: 8
+Magia: 5
+Defesa Magica: 7
+Classe híbrida com resistência e habilidades sagradas.
+
+5. Necromante
+Força: 3
+Velocidade: 4
+Defesa: 4
+Magia: 9
+Defesa Magica: 6
+Usuário de magia sombria com foco em controle e invocação.

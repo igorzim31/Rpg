@@ -1,0 +1,5 @@
+1. Guerreiro
+2. Mago
+3. Arqueiro
+4. Paladino
+5. Necromante
