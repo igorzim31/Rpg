@@ -11,11 +11,11 @@ import { goblin } from "./src/modelos/inimigos/goblin";
 import { esqueleto } from "./src/modelos/inimigos/esqueleto";
 import { javali } from "./src/modelos/inimigos/javali";
 import { serpente } from "./src/modelos/inimigos/serpente";
-import { zumbi } from  "./src/modelos/inimigos/zumbi"; 
+import { zumbi } from "./src/modelos/inimigos/zumbi";
 
 
 
-const teclado = prompt(); 
+const teclado = prompt();
 
 
 function tabclass() {
@@ -31,8 +31,8 @@ function criacaoPersonagem(perso: Personagem) {
     console.log("================================");
     let generoInput = teclado("Escolha seu gênero (M/F): ").toUpperCase();
     console.log("================================");
-    
-    tabclass(); 
+
+    tabclass();
     const escolha = +teclado("Selecione sua classe acima: ");
 
 
@@ -42,7 +42,7 @@ function criacaoPersonagem(perso: Personagem) {
         case 3: perso = new Arqueiro(); break;
         case 4: perso = new Paladino(); break;
         case 5: perso = new Necromante(); break;
-        default: 
+        default:
             console.log("Escolha inválida, criando Guerreiro por padrão.");
             nome = "Aventureiro";
             generoInput = "M";
@@ -53,13 +53,13 @@ function criacaoPersonagem(perso: Personagem) {
         generoInput = "Masculino";
     } else if (generoInput === 'F') {
         generoInput = "Feminino";
-    } 
+    }
 
     const nomeDasClasses = ["Guerreiro", "Mago", "Arqueiro", "Paladino", "Necromante"];
     const classnome = nomeDasClasses[escolha - 1] || "Guerreiro";
     perso.nome = nome;
-    perso.genero = generoInput 
-    perso.classe = classnome; 
+    perso.genero = generoInput
+    perso.classe = classnome;
 
     fs.writeFileSync("saves/personagem.json", JSON.stringify(perso, null, 2));
     console.log(`\n${perso.nome}, o ${classnome}, foi criado com sucesso!`);
@@ -79,45 +79,45 @@ function statusPersonagem() {
     console.log(`Defesa Mágica: ${perso.defmagica}\n`);
 }
 
-function tabela () {
+function tabela() {
     let continuar = true;
-    
+
     while (continuar) {
-    console.log("\nA tabela de classes é a seguinte: \n");
-    console.log("================================");
-    console.log("1. Guerreiro \n2. Mago \n3. Arqueiro \n4. Paladino \n5. Necromante");
-    console.log("================================");
-    const classe = +teclado("Selecione a classe para ver os status ou aperta 0 para sair: ");
-    console.log("================================");
-    switch (classe) {
-        case 0:
-            console.log("Saindo da tabela...");
-            continuar = false;
-            break;
-        case 1:
-            console.log("Guerreiro \nForça: 8 \nVelocidade: 6 \nDefesa: 7 \nMagia: 2 \nDefesa Mágica: 3");
-            teclado("Pressione enter para continuar... ");
-            break;
-        case 2:
-            console.log("Mago \nForça: 2 \nVelocidade: 5 \nDefesa: 3 \nMagia: 10 \nDefesa Mágica: 7");
-            teclado("Pressione enter para continuar... ");
-            break;
-        case 3:
-            console.log("Arqueiro \nForça: 6 \nVelocidade: 9 \nDefesa: 5 \nMagia: 3 \nDefesa Mágica: 4");
-            teclado("Pressione enter para continuar... ");
-            break;
-        case 4:
-            console.log("Paladino \nForça: 7 \nVelocidade: 3 \nDefesa: 8 \nMagia: 5 \nDefesa Mágica: 7");
-            teclado("Pressione enter para continuar... ");
-            break;
-        case 5:
-            console.log("Necromante \nForça: 3 \nVelocidade: 4 \nDefesa: 4 \nMagia: 9 \nDefesa Mágica: 6");
-            teclado("Pressione enter para continuar... ");
-            break;
-        default:
-            console.log("Classe inválida!");
+        console.log("\nA tabela de classes é a seguinte: \n");
+        console.log("================================");
+        console.log("1. Guerreiro \n2. Mago \n3. Arqueiro \n4. Paladino \n5. Necromante");
+        console.log("================================");
+        const classe = +teclado("Selecione a classe para ver os status ou aperta 0 para sair: ");
+        console.log("================================");
+        switch (classe) {
+            case 0:
+                console.log("Saindo da tabela...");
+                continuar = false;
+                break;
+            case 1:
+                console.log("Guerreiro \nForça: 8 \nVelocidade: 6 \nDefesa: 7 \nMagia: 2 \nDefesa Mágica: 3");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 2:
+                console.log("Mago \nForça: 2 \nVelocidade: 5 \nDefesa: 3 \nMagia: 10 \nDefesa Mágica: 7");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 3:
+                console.log("Arqueiro \nForça: 6 \nVelocidade: 9 \nDefesa: 5 \nMagia: 3 \nDefesa Mágica: 4");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 4:
+                console.log("Paladino \nForça: 7 \nVelocidade: 3 \nDefesa: 8 \nMagia: 5 \nDefesa Mágica: 7");
+                teclado("Pressione enter para continuar... ");
+                break;
+            case 5:
+                console.log("Necromante \nForça: 3 \nVelocidade: 4 \nDefesa: 4 \nMagia: 9 \nDefesa Mágica: 6");
+                teclado("Pressione enter para continuar... ");
+                break;
+            default:
+                console.log("Classe inválida!");
+        }
     }
-  }
 }
 
 async function iniciarJogo(): Promise<void> {
@@ -140,7 +140,7 @@ async function iniciarJogo(): Promise<void> {
                 mapa[y]![x] = spriteparede;
             }
         }
-    } 
+    }
     let portalPos = { x: 0, y: 0 };
     while (portalPos.x === 0 || portalPos.x === larguramap - 1 || portalPos.y === 0 || portalPos.y === alturamap - 1) {
         portalPos = {
@@ -156,8 +156,8 @@ async function iniciarJogo(): Promise<void> {
     }
 
     let inimigoPos = {
-    x: Math.floor(larguramap / 2),
-    y: Math.floor(alturamap / 2)
+        x: Math.floor(larguramap / 2),
+        y: Math.floor(alturamap / 2)
     };
     mapa[inimigoPos.y]![inimigoPos.x] = inimigo;
 
@@ -175,18 +175,18 @@ async function iniciarJogo(): Promise<void> {
                 }
             }
         }
-            playerPos = { x: 2, y: 2 };
+        playerPos = { x: 2, y: 2 };
 
     }
     function renderizarMapa(map: string[][]) {
         console.clear();
-        for (let y = 0; y < map.length; y++) { 
-            if (!map[y]) continue; 
+        for (let y = 0; y < map.length; y++) {
+            if (!map[y]) continue;
             console.log(map[y]!.join(' '));
         }
-    } 
+    }
 
-    function moverJogador(dx: number, dy: number) { 
+    function moverJogador(dx: number, dy: number) {
         const nx = playerPos.x + dx;
         const ny = playerPos.y + dy;
 
@@ -201,21 +201,21 @@ async function iniciarJogo(): Promise<void> {
         if (mapa[ny] && mapa[ny][nx] === inimigo) {
             console.log("Você encontrou um inimigo! Prepare-se para a batalha!");
             iniciarBatalha();
-            if (mapa[ny] && mapa[ny][nx] === inimigo) { 
+            if (mapa[ny] && mapa[ny][nx] === inimigo) {
                 console.log("\nVocê deseja continuar explorando ou sair do jogo? (continuar/sair)");
                 const escolha = teclado("Digite a opção: ");
                 if (escolha.toLowerCase() === "continuar") {
                     mapa[ny][nx] = spritechao;
-                    return false; 
+                    return false;
                 }
                 else if (escolha.toLowerCase() === "sair") {
                     console.log("Saindo do jogo...");
                     process.stdin.emit('keypress', 'q', { name: 'q' });
-                    return true; 
+                    return true;
                 }
             }
         }
-        
+
         if (mapa[playerPos.y]) {
             mapa[playerPos.y]![playerPos.x] = spritechao; // esse if é pra limpar a posição atual do jogador no mapa, ou seja, substituir o 'p' pelo '.' para que o mapa seja atualizado corretamente quando o jogador se mover. Sem isso, o mapa mostraria vários 'p' nas posições anteriores do jogador, o que não é desejado.
         }
@@ -229,15 +229,15 @@ async function iniciarJogo(): Promise<void> {
         renderizarMapa(mapa);
     }
 
-    readline.emitKeypressEvents(process.stdin); 
-    if (process.stdin.isTTY) { 
-        process.stdin.setRawMode(true); 
+    readline.emitKeypressEvents(process.stdin);
+    if (process.stdin.isTTY) {
+        process.stdin.setRawMode(true);
     }
 
     renderizarMapa(mapa);
     console.log("Use W/A/S/D para mover, Q para sair ao menu");
 
-    return new Promise<void>((resolve) => { 
+    return new Promise<void>((resolve) => {
         const keypressListener = (str: string, key: readline.Key) => {
             const encerrarMapa = () => {
                 process.stdin.removeListener('keypress', keypressListener);
@@ -248,7 +248,7 @@ async function iniciarJogo(): Promise<void> {
             if (key.ctrl && key.name === 'c') {
                 process.exit();
             } else if (str === 'q') {
-                encerrarMapa(); 
+                encerrarMapa();
             } else if (str === 'w') {
                 moverJogador(0, -1);
             } else if (str === 's') {
@@ -258,7 +258,7 @@ async function iniciarJogo(): Promise<void> {
             } else if (str === 'd') {
                 moverJogador(1, 0);
             }
-            
+
         };
 
 
@@ -274,21 +274,21 @@ function iniciarBatalha() {
     const inimigo = (new sinimigo[aleatorioi]!());
 
     let turno = 1;
- 
+
     while (perso.vida > 0 && inimigo.vida > 0) {
-      console.log(`\n============ Turno ${turno} ============`);
-      console.log(`\n A ${inimigo.nome} apareceu! Prepare-se para a batalha!`);
-      console.log(`\n Sua vida: ${perso.vida} | Vida do ${inimigo.nome}: ${inimigo.vida}`);
-   
-      console.log("\nVocê deseja atacar ou fugir? (atacar/fugir)");
-      const acao = teclado("Digite a opção: ");
+        console.log(`\n============ Turno ${turno} ============`);
+        console.log(`\n A ${inimigo.nome} apareceu! Prepare-se para a batalha!`);
+        console.log(`\n Sua vida: ${perso.vida} | Vida do ${inimigo.nome}: ${inimigo.vida}`);
+
+        console.log("\nVocê deseja atacar ou fugir? (atacar/fugir)");
+        const acao = teclado("Digite a opção: ");
 
         if (acao.toLowerCase() === "atacar") {
-           const tipoAtaque = teclado(`Você ${perso.nome} deseja usar ataque físico ou mágico? (físico/mágico) `);
+            const tipoAtaque = teclado(`Você ${perso.nome} deseja usar ataque físico ou mágico? (físico/mágico) `);
 
             if (tipoAtaque.toLowerCase() === "físico" || tipoAtaque.toLowerCase() === "fisico") {
 
-                
+
                 const msgAtaquePlayer = inimigo.receberDanoFisico(perso.danoAtaqueFisico());
                 console.log(`\n-> ${msgAtaquePlayer}`);
 
@@ -297,37 +297,44 @@ function iniciarBatalha() {
                 const msgAtaquePlayer = inimigo.receberDanoMagica(perso.danoAtaqueMagica());
                 console.log(`\n-> ${msgAtaquePlayer}`);
 
-            } 
-            if (inimigo.vida > 0) { 
-            const potencialFisico = inimigo.danoAtaqueFisico();
-            const potencialMagico = inimigo.danoAtaqueMagica();
+            }
+            if (inimigo.vida > 0) {
+                const potencialFisico = inimigo.danoAtaqueFisico();
+                const potencialMagico = inimigo.danoAtaqueMagica();
 
-            let msgAtaqueInimigo = "";
+                let msgAtaqueInimigo = "";
 
-            
-            if (potencialFisico >= potencialMagico) {
-            msgAtaqueInimigo = perso.receberDanoFisico(potencialFisico);
-            } else {
-            msgAtaqueInimigo = perso.receberDanoMagica(potencialMagico);
+
+                if (potencialFisico >= potencialMagico) {
+                    msgAtaqueInimigo = perso.receberDanoFisico(potencialFisico);
+                } else {
+                    msgAtaqueInimigo = perso.receberDanoMagica(potencialMagico);
+                }
+
+                console.log(`\n-> O inimigo contra-atacou: ${msgAtaqueInimigo}`);
             }
 
-            console.log(`\n-> O inimigo contra-atacou: ${msgAtaqueInimigo}`);
+            if (inimigo.danoPassivo() > 0 && perso.vida > 0) {
+                const valorPassivo = inimigo.danoPassivo();
+                perso.vida -= valorPassivo;
+                console.log(`\n[EFEITO] A ${inimigo.nome} aplicou um efeito! Você sofreu +${valorPassivo} de dano passivo.`);
             }
+
 
         } else if (acao.toLowerCase() === "fugir") {
             console.log("Você fugiu da batalha!");
             break;
         } else {
-        console.log("Opção inválida. Por favor, escolha 'atacar' ou 'fugir'.");
+            console.log("Opção inválida. Por favor, escolha 'atacar' ou 'fugir'.");
         }
         turno++;
         if (perso.vida <= 0) {
-        console.log("\n Você foi derrotado pelo inimigo..."); 
-        break;
+            console.log("\n Você foi derrotado pelo inimigo...");
+            break;
         } else if (inimigo.vida <= 0) {
-        console.log("\n Parabéns! Você solou o inimigo!");
-        break;  
-        }   
+            console.log("\n Parabéns! Você solou o inimigo!");
+            break;
+        }
     }
 }
 
@@ -369,7 +376,7 @@ function bestiario() {
             default:
                 console.log("Classe inválida!");
         }
-   }
+    }
 }
 
 function sair() {
@@ -382,8 +389,8 @@ function sair() {
 
 function save(perso: Personagem) {
 
-   // fs.writeFileSync("saves/save.txt", `${perso.nome},${perso.genero},${perso.classe}`);
-   const dadosPersonagem = {
+    // fs.writeFileSync("saves/save.txt", `${perso.nome},${perso.genero},${perso.classe}`);
+    const dadosPersonagem = {
         nome: perso.nome,
         genero: perso.genero,
         classe: perso.classe,
@@ -404,14 +411,14 @@ function carregarPersonagem(): Personagem {
         const dados = JSON.parse(dadosJson);
 
         const perso = new Guerreiro;
-        
+
         perso.nome = dados.nome;
         perso.genero = dados.genero;
         perso.classe = dados.classe;
 
         console.log("Personagem carregado do arquivo!");
         return perso;
-    }  catch (error) {
+    } catch (error) {
         console.log("Nenhum personagem salvo encontrado. crie um novo personagem.");
         // Se não houver arquivo, criar um personagem padrão
         const persoPadrao = new Guerreiro;
@@ -444,7 +451,7 @@ async function main() {
         switch (escolha) {
             case 1:
                 criacaoPersonagem(perso);
-                break;  
+                break;
             case 2:
                 statusPersonagem();
                 break;
@@ -453,7 +460,7 @@ async function main() {
                 tabela();
                 break;
             case 4:
-                await iniciarJogo();  
+                await iniciarJogo();
                 break;
             case 5:
                 iniciarBatalha();

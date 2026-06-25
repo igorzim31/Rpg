@@ -2,6 +2,6 @@ import { Inimigo } from "../Inimigo";
 
 export class goblin extends Inimigo {
     constructor() {
-        super("goblin",100, 3, 7, 2, 2, 3);
+        super("goblin",100, 3, 7, 2, 2, 3, 0);
     }
 }
