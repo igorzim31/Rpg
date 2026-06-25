@@ -7,7 +7,9 @@ export abstract class Inimigo {
     protected _defesa: number;
     protected _magia: number;
     protected _defmagica: number;
-    constructor(nome: string, vida: number, forca: number, velocidade: number, defesa: number, magia: number, defmagica: number) {
+    protected _danopassivo: number;
+
+    constructor(nome: string, vida: number, forca: number, velocidade: number, defesa: number, magia: number, defmagica: number, danopassivo: number) {
         this._nome = nome;
         this._vida = vida;
         this._forca = forca;
@@ -15,6 +17,7 @@ export abstract class Inimigo {
         this._defesa = defesa;
         this._magia = magia;
         this._defmagica = defmagica;
+        this._danopassivo = danopassivo;
     }
     action(): void {
         throw new Error("Method not implemented.");
@@ -55,6 +58,9 @@ export abstract class Inimigo {
 
     public rolouCritico(): boolean {
         return Math.random() < 0.05;
+    }
+    public danoPassivo(): number {
+        return this._danopassivo;
     }
     
 
